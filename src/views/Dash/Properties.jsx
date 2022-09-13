@@ -300,10 +300,7 @@ function Properties(props) {
                       <TableHead>
                         <TableRow>
                           <StyledTableCell align="left">
-                            Client Contact
-                          </StyledTableCell>
-                          <StyledTableCell align="left">
-                            Client Name
+                            Property Name
                           </StyledTableCell>
                           <StyledTableCell align="left">
                             Property Type
@@ -312,12 +309,8 @@ function Properties(props) {
                             Property Location
                           </StyledTableCell>
                           <StyledTableCell align="left">
-                            Property Status
-                          </StyledTableCell>
-                          <StyledTableCell align="left">
                             Property Price
                           </StyledTableCell>
-                          <StyledTableCell align="left">Owner</StyledTableCell>
                           <StyledTableCell align="center">
                             Actions
                           </StyledTableCell>
@@ -329,13 +322,8 @@ function Properties(props) {
                             ?.map((p) => (
                               <StyledTableRow key={p.id}>
                                 <StyledTableCell align="left">
-                                  {p.client_contact !== null
-                                    ? p.client_contact
-                                    : "----"}
-                                </StyledTableCell>
-                                <StyledTableCell align="left">
-                                  {p.client_name !== null
-                                    ? p.client_name
+                                  {p.property_name !== null
+                                    ? p.property_name
                                     : "----"}
                                 </StyledTableCell>
                                 <StyledTableCell align="left">
@@ -348,17 +336,8 @@ function Properties(props) {
                                     ? p.property_location
                                     : "----"}
                                 </StyledTableCell>
-
-                                <StyledTableCell align="left">
-                                  {p.verified !== null ? p.verified : "----"}
-                                </StyledTableCell>
                                 <StyledTableCell align="left">
                                   {p.price !== null ? p.price : "----"}
-                                </StyledTableCell>
-                                <StyledTableCell align="left">
-                                  {p.verified_by !== null
-                                    ? p.verified_by
-                                    : "----"}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
                                   <div>

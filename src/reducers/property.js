@@ -7,7 +7,6 @@ const initialState = {
   delete_loading: false,
   properties: [],
   error: null,
-  success: false,
 };
 export default function property(state = initialState, action) {
   switch (action.type) {
@@ -53,13 +52,11 @@ export default function property(state = initialState, action) {
         properties: state.properties.map((property) =>
           property.id === action.payload.id ? action.payload : property
         ),
-        success:true,
         update_loading: false,
       };
     case actionTypes.UPDATE_PROPERTIES_FAIL:
       return {
         update_loading: false,
-        success:false,
         error: action.payload,
       };
 
@@ -73,13 +70,11 @@ export default function property(state = initialState, action) {
         properties: state.properties.filter(
           (property) => property.id !== action.payload
         ),
-        success: true,
         delete_loading: false,
       };
     case actionTypes.DELETE_PROPERTIES_FAIL:
       return {
         delete_loading: false,
-        success:false,
         error: action.payload,
       };
     default:

@@ -51,7 +51,9 @@ import CancelledList from "./CancelledList";
 import Home from "./Home";
 import Profile from "./Profile";
 import AddProperty from "./AddProperty.jsx";
-
+import ViewListIcon from "@material-ui/icons/ViewList";
+import PostAddIcon from "@material-ui/icons/PostAdd";
+import NotificationsIcon from '@material-ui/icons/Notifications';
 function Copyright(props) {
   return (
     <Typography
@@ -364,7 +366,7 @@ function DashboardContent(props) {
             <Divider />
             <ListItemButton selected={clients} button onClick={set_clients}>
               <ListItemIcon>
-                <Clients size={20} style={{ color: "#042c54" }} />
+                <PostAddIcon size={20} style={{ color: "#042c54" }} />
               </ListItemIcon>
               <ListItemText
                 primary="Add Property"
@@ -378,7 +380,7 @@ function DashboardContent(props) {
               onClick={set_verified}
             >
               <ListItemIcon>
-                <Verify size={15} style={{ color: "#042c54" }} />
+                <ViewListIcon size={15} style={{ color: "#042c54" }} />
               </ListItemIcon>
               <ListItemText
                 primary="Properties "
@@ -388,7 +390,7 @@ function DashboardContent(props) {
             <Divider />
             <ListItemButton selected={booking} button onClick={set_booking}>
               <ListItemIcon>
-                <FilterTiltShiftIcon style={{ color: "#042c54" }} />
+                <NotificationsIcon style={{ color: "#042c54" }} />
               </ListItemIcon>
               <ListItemText
                 primary="Notifications"
@@ -402,7 +404,7 @@ function DashboardContent(props) {
               onClick={set_block}
             >
               <ListItemIcon>
-                <ViewModuleIcon style={{ color: "#042c54" }} />
+                <Clients style={{ color: "#042c54" }} />
               </ListItemIcon>
               <ListItemText
                 primary="Profile"

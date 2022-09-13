@@ -130,29 +130,6 @@ function AddProperty(props) {
 
   return (
     <div>
-      <div className="mb-2">
-        {props.message && props.reason === "property_fields" ? (
-          <>
-            {(props.message !== null || props.message !== undefined) && (
-              <Alert severity="error" onClose={() => props.clearMessage()}>
-                {props.message}
-              </Alert>
-            )}
-          </>
-        ) : null}
-      </div>
-      <div className="mb-2">
-        {props.message && props.reason === "created_property" ? (
-          <>
-            {(props.message !== null || props.message !== undefined) && (
-              <Alert severity="success" onClose={() => props.clearMessage()}>
-                {props.message}
-              </Alert>
-            )}
-          </>
-        ) : null}
-      </div>
-
       <div className={classes.top_title}>
         <p className={classes.sub_title}>Add Property</p>
       </div>
@@ -351,6 +328,29 @@ function AddProperty(props) {
             />
           </Grid>
         </Grid>
+
+        <div style={{ margin: "8px 0px 2px 0px" }}>
+          {props.message && props.reason === "property_fields" ? (
+            <>
+              {(props.message !== null || props.message !== undefined) && (
+                <Alert severity="error" onClose={() => props.clearMessage()}>
+                  {props.message}
+                </Alert>
+              )}
+            </>
+          ) : null}
+        </div>
+        <div style={{ margin: "8px 0px 2px 0px" }}>
+          {props.message && props.reason === "created_property" ? (
+            <>
+              {(props.message !== null || props.message !== undefined) && (
+                <Alert severity="success" onClose={() => props.clearMessage()}>
+                  {props.message}
+                </Alert>
+              )}
+            </>
+          ) : null}
+        </div>
 
         <div style={{ margin: "20px 0px 20px 0px" }}>
           <Button

@@ -136,7 +136,6 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: "3px 0px 1px",
     height: "40px",
-    textTransform: "none",
     fontSize: "13px!important",
     background: "#FF5722",
     fontFamily: "Dosis",
@@ -144,6 +143,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "18px",
     lineHeight: "16px",
     color: "#FFFFFF!important",
+    background: "#042c54",
+    textTransform: "capitalize",
+    marginRight: "10px",
+    "&:hover": {
+      background: "#042c54",
+    },
   },
 }));
 
@@ -248,450 +253,421 @@ function Properties(props) {
 
   return (
     <>
-      <>
-        <div>
-          {props.message && props.reason === "delete_property" ? (
-            <>
-              {(props.message !== null || props.message !== undefined) && (
-                <Alert severity="success" onClose={() => props.clearMessage()}>
-                  {props.message}
-                </Alert>
-              )}
-            </>
-          ) : null}
+      <div>
+        {props.message && props.reason === "delete_property" ? (
+          <>
+            {(props.message !== null || props.message !== undefined) && (
+              <Alert severity="success" onClose={() => props.clearMessage()}>
+                {props.message}
+              </Alert>
+            )}
+          </>
+        ) : null}
+      </div>
+      <div>
+        {props.message && props.reason === "update_property" ? (
+          <>
+            {(props.message !== null || props.message !== undefined) && (
+              <Alert severity="success" onClose={() => props.clearMessage()}>
+                {props.message}
+              </Alert>
+            )}
+          </>
+        ) : null}
+      </div>
+      <div className={classes.top_title}>
+        <p className={classes.sub_title}>Properties</p>
+        <div style={{ flex: 1, alignItems: "flex-end" }}>
+          <Autocomplete
+            list={list_data}
+            get_section_value={get_section_value}
+          />
         </div>
+      </div>
+      {props.get_loading ? (
+        <img src={load} height="100" width="100" />
+      ) : (
         <div>
-          {props.message && props.reason === "update_property" ? (
-            <>
-              {(props.message !== null || props.message !== undefined) && (
-                <Alert severity="success" onClose={() => props.clearMessage()}>
-                  {props.message}
-                </Alert>
-              )}
-            </>
-          ) : null}
-        </div>
-        <div className={classes.top_title}>
-          <p className={classes.sub_title}>Properties</p>
-          <div style={{ flex: 1, alignItems: "flex-end" }}>
-            <Autocomplete
-              list={list_data}
-              get_section_value={get_section_value}
-            />
+          <div className={classes.schedule_grid}>
+            <Grid className={classes.grid} container spacing={2}>
+              <Grid item lg={12} md={12} sm={6} xs={12}>
+                {props.properties !== null ? (
+                  <TableContainer component={Paper}>
+                    <Table
+                      className={classes.table}
+                      aria-label="customized table"
+                    >
+                      <TableHead>
+                        <TableRow>
+                          <StyledTableCell align="left">
+                            Client Contact
+                          </StyledTableCell>
+                          <StyledTableCell align="left">
+                            Client Name
+                          </StyledTableCell>
+                          <StyledTableCell align="left">
+                            Property Type
+                          </StyledTableCell>
+                          <StyledTableCell align="left">
+                            Property Location
+                          </StyledTableCell>
+                          <StyledTableCell align="left">
+                            Property Status
+                          </StyledTableCell>
+                          <StyledTableCell align="left">
+                            Property Price
+                          </StyledTableCell>
+                          <StyledTableCell align="left">Owner</StyledTableCell>
+                          <StyledTableCell align="center">
+                            Actions
+                          </StyledTableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {props.properties &&
+                          props.properties
+                            ?.map((p) => (
+                              <StyledTableRow key={p.id}>
+                                <StyledTableCell align="left">
+                                  {p.client_contact !== null
+                                    ? p.client_contact
+                                    : "----"}
+                                </StyledTableCell>
+                                <StyledTableCell align="left">
+                                  {p.client_name !== null
+                                    ? p.client_name
+                                    : "----"}
+                                </StyledTableCell>
+                                <StyledTableCell align="left">
+                                  {p.property_type !== null
+                                    ? p.property_type
+                                    : "----"}
+                                </StyledTableCell>
+                                <StyledTableCell align="left">
+                                  {p.property_location !== null
+                                    ? p.property_location
+                                    : "----"}
+                                </StyledTableCell>
+
+                                <StyledTableCell align="left">
+                                  {p.verified !== null ? p.verified : "----"}
+                                </StyledTableCell>
+                                <StyledTableCell align="left">
+                                  {p.price !== null ? p.price : "----"}
+                                </StyledTableCell>
+                                <StyledTableCell align="left">
+                                  {p.verified_by !== null
+                                    ? p.verified_by
+                                    : "----"}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                  <div>
+                                    <IconButton
+                                      onClick={() => {
+                                        setCurrentId(p.id);
+                                        setOpenPopup(true);
+                                      }}
+                                    >
+                                      <CreateIcon
+                                        color="primary"
+                                        fontSize="small"
+                                      />
+                                    </IconButton>
+
+                                    <IconButton
+                                      onClick={() => {
+                                        setCurrentId(p.id);
+                                        setOpenDeletePopup(true);
+                                      }}
+                                    >
+                                      <DeleteIcon
+                                        color="error"
+                                        fontSize="small"
+                                      />
+                                    </IconButton>
+                                  </div>
+                                </StyledTableCell>
+                              </StyledTableRow>
+                            ))
+                            .reverse()}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                ) : null}
+              </Grid>
+            </Grid>
           </div>
         </div>
-        {props.get_loading ? (
-          <img src={load} height="100" width="100" />
-        ) : (
-          <div>
-            <div className={classes.schedule_grid}>
-              <Grid className={classes.grid} container spacing={2}>
-                <Grid item lg={12} md={12} sm={6} xs={12}>
-                  {props.properties !== null ? (
-                    <TableContainer component={Paper}>
-                      <Table
-                        className={classes.table}
-                        aria-label="customized table"
-                      >
-                        <TableHead>
-                          <TableRow>
-                            <StyledTableCell align="left">
-                              Client Contact
-                            </StyledTableCell>
-                            <StyledTableCell align="left">
-                              Client Name
-                            </StyledTableCell>
-                            <StyledTableCell align="left">
-                              Property Type
-                            </StyledTableCell>
-                            <StyledTableCell align="left">
-                              Property Location
-                            </StyledTableCell>
-                            <StyledTableCell align="left">
-                              Property Status
-                            </StyledTableCell>
-                            <StyledTableCell align="left">
-                              Property Price
-                            </StyledTableCell>
-                            <StyledTableCell align="left">
-                              Owner
-                            </StyledTableCell>
-                            <StyledTableCell align="center">
-                              Actions
-                            </StyledTableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {props.properties &&
-                            props.properties
-                              ?.map((p) => (
-                                <StyledTableRow key={p.id}>
-                                  <StyledTableCell align="left">
-                                    {p.client_contact !== null
-                                      ? p.client_contact
-                                      : "----"}
-                                  </StyledTableCell>
-                                  <StyledTableCell align="left">
-                                    {p.client_name !== null
-                                      ? p.client_name
-                                      : "----"}
-                                  </StyledTableCell>
-                                  <StyledTableCell align="left">
-                                    {p.property_type !== null
-                                      ? p.property_type
-                                      : "----"}
-                                  </StyledTableCell>
-                                  <StyledTableCell align="left">
-                                    {p.property_location !== null
-                                      ? p.property_location
-                                      : "----"}
-                                  </StyledTableCell>
-
-                                  <StyledTableCell align="left">
-                                    {p.verified !== null ? p.verified : "----"}
-                                  </StyledTableCell>
-                                  <StyledTableCell align="left">
-                                    {p.price !== null ? p.price : "----"}
-                                  </StyledTableCell>
-                                  <StyledTableCell align="left">
-                                    {p.verified_by !== null
-                                      ? p.verified_by
-                                      : "----"}
-                                  </StyledTableCell>
-                                  <StyledTableCell align="center">
-                                    <div>
-                                      <IconButton
-                                        onClick={() => {
-                                          setOpenPopup(true);
-                                          setCurrentId(p.id);
-                                        }}
-                                      >
-                                        <CreateIcon
-                                          color="primary"
-                                          fontSize="small"
-                                        />
-                                      </IconButton>
-
-                                      <IconButton
-                                        onClick={() => {
-                                          setOpenDeletePopup(true);
-                                          setCurrentId(p.id);
-                                        }}
-                                      >
-                                        <DeleteIcon
-                                          color="error"
-                                          fontSize="small"
-                                        />
-                                      </IconButton>
-                                    </div>
-                                  </StyledTableCell>
-                                </StyledTableRow>
-                              ))
-                              .reverse()}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                  ) : null}
-                </Grid>
+      )}
+      <Popup
+        openPopup={openPopup}
+        openDeletePopup={openDeletePopup}
+        title={openPopup && "Edit Property"}
+        setOpenPopup={setOpenPopup}
+        setOpenDeletePopup={setOpenDeletePopup}
+      >
+        {openPopup && (
+          <Form onSubmit={handleSubmit} className={classes.root}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={6}>
+                <FormLabel component="label" className={classes.formLabel}>
+                  <div className="gpt3__cta-content_button_text">
+                    <span style={{ fontSize: "15px" }}>Client Name</span>
+                  </div>
+                </FormLabel>
+                <Input
+                  placeholder="enter client name"
+                  name="client_name"
+                  value={propertyData.client_name}
+                  onChange={handleInputChange}
+                  variant="outlined"
+                  fullWidth
+                  inputProps={{ "aria-label": "amount" }}
+                  className={classes.inputSmall}
+                  disableUnderline
+                />
               </Grid>
+              <Grid item xs={12} md={6}>
+                <FormLabel component="label" className={classes.formLabel}>
+                  <div className="gpt3__cta-content_button_text">
+                    <span style={{ fontSize: "15px" }}>Client Contact</span>
+                  </div>
+                </FormLabel>
+                <Input
+                  placeholder="enter client contact"
+                  name="client_contact"
+                  value={propertyData.client_contact}
+                  onChange={handleInputChange}
+                  variant="outlined"
+                  fullWidth
+                  inputProps={{ "aria-label": "amount" }}
+                  className={classes.inputSmall}
+                  disableUnderline
+                  type="tel"
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <FormLabel component="label" className={classes.formLabel}>
+                  <div className="gpt3__cta-content_button_text">
+                    <span style={{ fontSize: "15px" }}>Client Email</span>
+                  </div>
+                </FormLabel>
+                <Input
+                  placeholder="enter client email"
+                  name="client_email"
+                  value={propertyData.client_email}
+                  onChange={handleInputChange}
+                  type="email"
+                  fullWidth
+                  inputProps={{ "aria-label": "amount" }}
+                  className={classes.inputSmall}
+                  disableUnderline
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <FormLabel component="label" className={classes.formLabel}>
+                  <div className="gpt3__cta-content_button_text">
+                    <span style={{ fontSize: "15px" }}>Property Type</span>
+                  </div>
+                </FormLabel>
+                <Select
+                  label="Property Type"
+                  placeholder="enter property type"
+                  name="property_type"
+                  value={propertyData.property_type}
+                  onChange={handleInputChange}
+                  fullWidth
+                  inputProps={{ "aria-label": "amount" }}
+                  className={classes.inputSelect}
+                  disableUnderline
+                >
+                  <MenuItem value="0">Choose Property Type ....</MenuItem>
+                  {properties_things.map((p) => (
+                    <MenuItem key={p.id} value={p.id}>
+                      {p.Title}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <FormLabel component="label" className={classes.formLabel}>
+                  <div className="gpt3__cta-content_button_text">
+                    <span style={{ fontSize: "15px" }}>Property Name</span>
+                  </div>
+                </FormLabel>
+                <Input
+                  label="Property Name"
+                  placeholder="enter property name"
+                  name="property_name"
+                  value={propertyData.property_name}
+                  onChange={handleInputChange}
+                  fullWidth
+                  inputProps={{ "aria-label": "amount" }}
+                  className={classes.inputSmall}
+                  disableUnderline
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <FormLabel component="label" className={classes.formLabel}>
+                  <div className="gpt3__cta-content_button_text">
+                    <span style={{ fontSize: "15px" }}>Property Location</span>
+                  </div>
+                </FormLabel>
+                <Input
+                  label="Property Location"
+                  placeholder="enter property location"
+                  name="property_location"
+                  value={propertyData.property_location}
+                  onChange={handleInputChange}
+                  fullWidth
+                  inputProps={{ "aria-label": "amount" }}
+                  className={classes.inputSmall}
+                  disableUnderline
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <FormLabel component="label" className={classes.formLabel}>
+                  <div className="gpt3__cta-content_button_text">
+                    <span style={{ fontSize: "15px" }}>Price</span>
+                  </div>
+                </FormLabel>
+                <Input
+                  label="Price"
+                  placeholder="price"
+                  name="price"
+                  value={propertyData.price}
+                  onChange={handleInputChange}
+                  fullWidth
+                  inputProps={{ "aria-label": "amount" }}
+                  className={classes.inputSmall}
+                  disableUnderline
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <FormLabel component="label" className={classes.formLabel}>
+                  <div className="gpt3__cta-content_button_text">
+                    <span style={{ fontSize: "15px" }}>Partial Payment</span>
+                  </div>
+                </FormLabel>
+                <Switch
+                  checked={partial_payment}
+                  onChange={() => setPartialPayment(!partial_payment)}
+                  color="primary"
+                  name="Partial Payment"
+                  inputProps={{ "aria-label": "primary checkbox" }}
+                  style={{ alignSelf: "flex-end" }}
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <FormLabel component="label" className={classes.formLabel}>
+                  <div className="gpt3__cta-content_button_text">
+                    <span style={{ fontSize: "15px" }}>Additional Info</span>
+                  </div>
+                </FormLabel>
+                <Input
+                  label="Additional Info"
+                  placeholder="enter additional info"
+                  name="additional_info"
+                  value={propertyData.additional_info}
+                  onChange={handleInputChange}
+                  fullWidth
+                  multiline
+                  disableUnderline
+                  rows="3"
+                  inputProps={{ "aria-label": "amount" }}
+                  className={classes.inputSmall}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <FormLabel component="label" className={classes.formLabel}>
+                  <div className="gpt3__cta-content_button_text">
+                    <span style={{ fontSize: "15px" }}>
+                      Property Description
+                    </span>
+                  </div>
+                </FormLabel>
+                <Input
+                  label="Property Description"
+                  placeholder="enter property description"
+                  name="property_description"
+                  value={propertyData.property_description}
+                  onChange={handleInputChange}
+                  fullWidth
+                  inputProps={{ "aria-label": "amount" }}
+                  className={classes.inputSmall}
+                  disableUnderline
+                  multiline
+                  rows="3"
+                />
+              </Grid>
+            </Grid>
+
+            <div
+              style={{
+                margin: "20px 0px 20px 0px",
+                display: "flex",
+              }}
+            >
+              <Button type="submit" className={classes.submit}>
+                {props.update_loading ? (
+                  <img src={load} height="100" width="100" />
+                ) : (
+                  "Update"
+                )}
+              </Button>
+              <Button
+                type="button"
+                className={classes.submit}
+                onClick={() => setOpenPopup(false)}
+                style={{ backgroundColor: "crimson" }}
+              >
+                Cancel
+              </Button>
+            </div>
+          </Form>
+        )}
+
+        {openDeletePopup && (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <di>Are you sure you want to delete?</di>
+
+            <div
+              style={{
+                margin: "20px 0px 20px 0px",
+                display: "flex",
+              }}
+            >
+              <Button
+                type="submit"
+                className={classes.submit}
+                onClick={() => props.delete_properties(currentId)}
+              >
+                {props.delete_loading ? (
+                  <img src={load} height="100" width="100" />
+                ) : (
+                  "Delete"
+                )}
+              </Button>
+              <Button
+                type="button"
+                className={classes.submit}
+                onClick={() => setOpenDeletePopup(false)}
+                style={{ backgroundColor: "crimson" }}
+              >
+                Cancel
+              </Button>
             </div>
           </div>
         )}
-        <Popup
-          openPopup={openPopup}
-          openDeletePopup={openDeletePopup}
-          title={openPopup && "Edit Property"}
-          setOpenPopup={setOpenPopup}
-          setOpenDeletePopup={setOpenDeletePopup}
-        >
-          {openPopup && (
-            <Form onSubmit={handleSubmit} className={classes.root}>
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={6}>
-                  <FormLabel component="label" className={classes.formLabel}>
-                    <div className="gpt3__cta-content_button_text">
-                      <span style={{ fontSize: "15px" }}>Client Name</span>
-                    </div>
-                  </FormLabel>
-                  <Input
-                    placeholder="enter client name"
-                    name="client_name"
-                    value={propertyData.client_name}
-                    onChange={handleInputChange}
-                    variant="outlined"
-                    fullWidth
-                    inputProps={{ "aria-label": "amount" }}
-                    className={classes.inputSmall}
-                    disableUnderline
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <FormLabel component="label" className={classes.formLabel}>
-                    <div className="gpt3__cta-content_button_text">
-                      <span style={{ fontSize: "15px" }}>Client Contact</span>
-                    </div>
-                  </FormLabel>
-                  <Input
-                    placeholder="enter client contact"
-                    name="client_contact"
-                    value={propertyData.client_contact}
-                    onChange={handleInputChange}
-                    variant="outlined"
-                    fullWidth
-                    inputProps={{ "aria-label": "amount" }}
-                    className={classes.inputSmall}
-                    disableUnderline
-                    type="tel"
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <FormLabel component="label" className={classes.formLabel}>
-                    <div className="gpt3__cta-content_button_text">
-                      <span style={{ fontSize: "15px" }}>Client Email</span>
-                    </div>
-                  </FormLabel>
-                  <Input
-                    placeholder="enter client email"
-                    name="client_email"
-                    value={propertyData.client_email}
-                    onChange={handleInputChange}
-                    type="email"
-                    fullWidth
-                    inputProps={{ "aria-label": "amount" }}
-                    className={classes.inputSmall}
-                    disableUnderline
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <FormLabel component="label" className={classes.formLabel}>
-                    <div className="gpt3__cta-content_button_text">
-                      <span style={{ fontSize: "15px" }}>Property Type</span>
-                    </div>
-                  </FormLabel>
-                  <Select
-                    label="Property Type"
-                    placeholder="enter property type"
-                    name="property_type"
-                    value={propertyData.property_type}
-                    onChange={handleInputChange}
-                    fullWidth
-                    inputProps={{ "aria-label": "amount" }}
-                    className={classes.inputSelect}
-                    disableUnderline
-                  >
-                    <MenuItem value="0">Choose Property Type ....</MenuItem>
-                    {properties_things.map((p) => (
-                      <MenuItem key={p.id} value={p.id}>
-                        {p.Title}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </Grid>
-
-                <Grid item xs={12} md={6}>
-                  <FormLabel component="label" className={classes.formLabel}>
-                    <div className="gpt3__cta-content_button_text">
-                      <span style={{ fontSize: "15px" }}>Property Name</span>
-                    </div>
-                  </FormLabel>
-                  <Input
-                    label="Property Name"
-                    placeholder="enter property name"
-                    name="property_name"
-                    value={propertyData.property_name}
-                    onChange={handleInputChange}
-                    fullWidth
-                    inputProps={{ "aria-label": "amount" }}
-                    className={classes.inputSmall}
-                    disableUnderline
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <FormLabel component="label" className={classes.formLabel}>
-                    <div className="gpt3__cta-content_button_text">
-                      <span style={{ fontSize: "15px" }}>
-                        Property Location
-                      </span>
-                    </div>
-                  </FormLabel>
-                  <Input
-                    label="Property Location"
-                    placeholder="enter property location"
-                    name="property_location"
-                    value={propertyData.property_location}
-                    onChange={handleInputChange}
-                    fullWidth
-                    inputProps={{ "aria-label": "amount" }}
-                    className={classes.inputSmall}
-                    disableUnderline
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <FormLabel component="label" className={classes.formLabel}>
-                    <div className="gpt3__cta-content_button_text">
-                      <span style={{ fontSize: "15px" }}>Price</span>
-                    </div>
-                  </FormLabel>
-                  <Input
-                    label="Price"
-                    placeholder="price"
-                    name="price"
-                    value={propertyData.price}
-                    onChange={handleInputChange}
-                    fullWidth
-                    inputProps={{ "aria-label": "amount" }}
-                    className={classes.inputSmall}
-                    disableUnderline
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <FormLabel component="label" className={classes.formLabel}>
-                    <div className="gpt3__cta-content_button_text">
-                      <span style={{ fontSize: "15px" }}>Partial Payment</span>
-                    </div>
-                  </FormLabel>
-                  <Switch
-                    checked={partial_payment}
-                    onChange={() => setPartialPayment(!partial_payment)}
-                    color="primary"
-                    name="Partial Payment"
-                    inputProps={{ "aria-label": "primary checkbox" }}
-                    style={{ alignSelf: "flex-end" }}
-                  />
-                </Grid>
-
-                <Grid item xs={12} md={6}>
-                  <FormLabel component="label" className={classes.formLabel}>
-                    <div className="gpt3__cta-content_button_text">
-                      <span style={{ fontSize: "15px" }}>Additional Info</span>
-                    </div>
-                  </FormLabel>
-                  <Input
-                    label="Additional Info"
-                    placeholder="enter additional info"
-                    name="additional_info"
-                    value={propertyData.additional_info}
-                    onChange={handleInputChange}
-                    fullWidth
-                    multiline
-                    disableUnderline
-                    rows="3"
-                    inputProps={{ "aria-label": "amount" }}
-                    className={classes.inputSmall}
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <FormLabel component="label" className={classes.formLabel}>
-                    <div className="gpt3__cta-content_button_text">
-                      <span style={{ fontSize: "15px" }}>
-                        Property Description
-                      </span>
-                    </div>
-                  </FormLabel>
-                  <Input
-                    label="Property Description"
-                    placeholder="enter property description"
-                    name="property_description"
-                    value={propertyData.property_description}
-                    onChange={handleInputChange}
-                    fullWidth
-                    inputProps={{ "aria-label": "amount" }}
-                    className={classes.inputSmall}
-                    disableUnderline
-                    multiline
-                    rows="3"
-                  />
-                </Grid>
-              </Grid>
-
-              <div
-                style={{
-                  margin: "20px 0px 20px 0px",
-                  display: "flex",
-                }}
-              >
-                <Button
-                  type="submit"
-                  style={{
-                    background: "#042c54",
-                    color: "#fff",
-                    textTransform: "capitalize",
-                  }}
-                  className={classes.submit}
-                >
-                  {props.update_loading ? (
-                    <img src={load} height="100" width="100" />
-                  ) : (
-                    "Update"
-                  )}
-                </Button>
-                <Button
-                  type="button"
-                  style={{
-                    background: "red",
-                    marginLeft: "10px",
-                    color: "#fff",
-                    textTransform: "capitalize",
-                  }}
-                  className={classes.submit}
-                  onClick={() => setOpenPopup(false)}
-                >
-                  Cancel
-                </Button>
-              </div>
-            </Form>
-          )}
-
-          {openDeletePopup && (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <di>Are you sure you want to delete?</di>
-
-              <div
-                style={{
-                  margin: "20px 0px 20px 0px",
-                  display: "flex",
-                }}
-              >
-                <Button
-                  type="submit"
-                  style={{
-                    background: "#042c54",
-                    color: "#fff",
-                    textTransform: "capitalize",
-                  }}
-                  className={classes.submit}
-                  onClick={() => props.delete_properties(currentId)}
-                >
-                  {props.delete_loading ? (
-                    <img src={load} height="100" width="100" />
-                  ) : (
-                    "Delete"
-                  )}
-                </Button>
-                <Button
-                  type="button"
-                  size="small"
-                  style={{
-                    background: "red",
-                    marginLeft: "10px",
-                    color: "#fff",
-                    textTransform: "capitalize",
-                  }}
-                  onClick={() => setOpenDeletePopup(false)}
-                >
-                  Cancel
-                </Button>
-              </div>
-            </div>
-          )}
-        </Popup>
-      </>
+      </Popup>
     </>
   );
 }

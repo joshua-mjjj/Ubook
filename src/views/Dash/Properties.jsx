@@ -133,6 +133,18 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "800",
     fontFamily: "Dosis",
   },
+  submit: {
+    margin: "3px 0px 1px",
+    height: "40px",
+    textTransform: "none",
+    fontSize: "13px!important",
+    background: "#FF5722",
+    fontFamily: "Dosis",
+    fontWeight: "bold",
+    fontSize: "18px",
+    lineHeight: "16px",
+    color: "#FFFFFF!important",
+  },
 }));
 
 function Properties(props) {
@@ -621,6 +633,7 @@ function Properties(props) {
                     color: "#fff",
                     textTransform: "capitalize",
                   }}
+                  className={classes.submit}
                   onClick={() => setOpenPopup(false)}
                 >
                   Cancel

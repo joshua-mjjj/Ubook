@@ -91,6 +91,18 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "800",
     fontFamily: "Dosis",
   },
+  submit: {
+    margin: "3px 0px 1px",
+    height: "46px",
+    textTransform: "none",
+    fontSize: "13px!important",
+    background: "#FF5722",
+    fontFamily: "Dosis",
+    fontWeight: "bold",
+    fontSize: "22px",
+    lineHeight: "16px",
+    color: "#FFFFFF!important",
+  },
 }));
 function AddProperty(props) {
   const [partial_payment, setPartialPayment] = React.useState(false);

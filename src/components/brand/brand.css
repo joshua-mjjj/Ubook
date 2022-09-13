@@ -1,0 +1,38 @@
+
+.heading_brand{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.heading_brand h1 {
+    font-size: 25px;
+    line-height: 25px;
+    font-weight: 900;
+    font-family: Manrope, sans-serif;
+}
+
+.gpt3__brand_img{
+    flex: 1;
+}
+
+.gpt3__brand {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.gpt3__brand div {
+    flex: 1;
+    max-width: 150px;
+    min-width: 150px;
+    margin: 0.8rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

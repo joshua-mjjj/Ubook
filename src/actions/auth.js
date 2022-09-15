@@ -21,7 +21,7 @@ import {
 } from "./types";
 
 // export const global_url = process.env.REACT_APP_API_URL;
-export const global_url = "http://ubook-api.herokuapp.com/source";
+export const global_url = "https://ubook-api.herokuapp.com/source";
 // export const global_url_local = 'https://vippu-api.herokuapp.com'
 
 //  LOGIN

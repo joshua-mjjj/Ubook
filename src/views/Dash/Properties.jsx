@@ -593,7 +593,9 @@ function Properties(props) {
                 {props.update_loading ? (
                   <img src={load} height="100" width="100" />
                 ) : (
-                  "Update"
+                <div className="gpt3__cta-content_button_text">
+                    <span style={{ fontSize: "15px", color: 'white' }}>{"Update"}</span>
+                </div>
                 )}
               </Button>
               <Button
@@ -602,7 +604,9 @@ function Properties(props) {
                 onClick={() => setOpenPopup(false)}
                 style={{ backgroundColor: "crimson" }}
               >
-                Cancel
+                 <div className="gpt3__cta-content_button_text">
+                    <span style={{ fontSize: "15px", color: 'white' }}>{"Cancel"}</span>
+                </div>
               </Button>
             </div>
           </Form>
@@ -632,7 +636,9 @@ function Properties(props) {
                 {props.delete_loading ? (
                   <img src={load} height="100" width="100" />
                 ) : (
-                  "Delete"
+                   <div className="gpt3__cta-content_button_text">
+                    <span style={{ fontSize: "15px", color: 'white' }}>{"Delete"}</span>
+                </div>
                 )}
               </Button>
               <Button
@@ -641,7 +647,9 @@ function Properties(props) {
                 onClick={() => setOpenDeletePopup(false)}
                 style={{ backgroundColor: "crimson" }}
               >
-                Cancel
+                 <div className="gpt3__cta-content_button_text">
+                    <span style={{ fontSize: "15px", color: 'white' }}>{"Cancel"}</span>
+                </div>
               </Button>
             </div>
           </div>

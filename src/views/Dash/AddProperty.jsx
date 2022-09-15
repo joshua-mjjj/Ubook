@@ -378,7 +378,9 @@ function AddProperty(props) {
             {props.create_loading ? (
               <img src={load} height="100" width="100" />
             ) : (
-              "Create"
+             <div className="gpt3__cta-content_button_text">
+                <span style={{ fontSize: "20px", color: 'white' }}>{"Create Property"}</span>
+            </div>
             )}
           </Button>
         </div>

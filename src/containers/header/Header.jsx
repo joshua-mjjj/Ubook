@@ -30,7 +30,7 @@ const Header = () => {
 
           <div className="gpt3__header-content__input">
            {/* <input type="email" placeholder="Your Email Address" />*/}
-            <button type="button" onClick={() => window.location.href = "/"} >Get started > </button>
+            <button type="button" onClick={() => window.location.href = "#wgpt3"} >Get started > </button>
           </div>
         </div>
 

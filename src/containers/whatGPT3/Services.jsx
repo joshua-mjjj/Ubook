@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   input: {
     paddingLeft: "23px",
     marginLeft: theme.spacing(1),
-    fontSize: "33px",
+    fontSize: "24px",
     lineHeight: "41px",
     color: "#000",
     outline: 'none',
